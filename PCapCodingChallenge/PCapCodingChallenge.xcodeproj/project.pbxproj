@@ -61,19 +61,27 @@
 		FC2E499624DA0ACA00A58E03 /* PCapCodingChallenge */ = {
 			isa = PBXGroup;
 			children = (
+				FC2E499D24DA0ACA00A58E03 /* ViewController.h */,
+				FC2E499E24DA0ACA00A58E03 /* ViewController.m */,
+				FC2E49B024DA10B300A58E03 /* Resources */,
+			);
+			path = PCapCodingChallenge;
+			sourceTree = "<group>";
+		};
+		FC2E49B024DA10B300A58E03 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
 				FC2E499724DA0ACA00A58E03 /* AppDelegate.h */,
 				FC2E499824DA0ACA00A58E03 /* AppDelegate.m */,
 				FC2E499A24DA0ACA00A58E03 /* SceneDelegate.h */,
 				FC2E499B24DA0ACA00A58E03 /* SceneDelegate.m */,
-				FC2E499D24DA0ACA00A58E03 /* ViewController.h */,
-				FC2E499E24DA0ACA00A58E03 /* ViewController.m */,
 				FC2E49A024DA0ACA00A58E03 /* Main.storyboard */,
 				FC2E49A324DA0ACC00A58E03 /* Assets.xcassets */,
 				FC2E49A524DA0ACC00A58E03 /* LaunchScreen.storyboard */,
 				FC2E49A824DA0ACC00A58E03 /* Info.plist */,
 				FC2E49A924DA0ACC00A58E03 /* main.m */,
 			);
-			path = PCapCodingChallenge;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
