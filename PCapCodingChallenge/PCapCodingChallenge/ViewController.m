@@ -19,7 +19,12 @@
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blueColor];
     [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles) {
-        NSLog(@"%@", articles);
+        [[articles objectAtIndex:0] valueForKey:@"title"];
+        NSLog(@"%@, %@, %@, %@", [[articles objectAtIndex:0] valueForKey:@"title"], [[articles objectAtIndex:0] valueForKey:@"featuredImagePath"], [[articles objectAtIndex:0] valueForKey:@"summary"], [[articles objectAtIndex:0] valueForKey:@"contentHTML"]);
+
+        [KDTArticleController fetchImageForArticle:[articles objectAtIndex:0] completion:^(UIImage * _Nonnull image) {
+            NSLog(@"image: %@", image);
+        }];
     }];
 }
 

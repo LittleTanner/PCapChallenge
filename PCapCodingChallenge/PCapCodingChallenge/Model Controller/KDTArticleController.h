@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (void)fetchArticlesWithCompletion:(void (^)(NSMutableArray<KDTArticle *> *articles))completion;
 
-+ (void)fetchImageForArticle: (KDTArticle *)article completion: (void (^)(UIImage *featuredImage))completion;
++ (void)fetchImageForArticle: (KDTArticle *)article completion: (void (^)(UIImage *image))completion;
 
 @end
 

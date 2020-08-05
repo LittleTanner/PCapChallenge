@@ -63,9 +63,40 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
     }]resume];
 }
 
-+ (void)fetchImageForArticle:(KDTArticle *)article completion:(void (^)(UIImage * _Nullable featuredImage))completion
++ (void)fetchImageForArticle:(KDTArticle *)article completion:(void (^)(UIImage * _Nullable image))completion
 {
+    // URL
+    NSURL *imageURL = [NSURL URLWithString:[article featuredImagePath]];
+    NSLog(@"%@", imageURL);
     
+    [[[NSURLSession sharedSession] dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        // Check for error
+        if (error)
+        {
+            NSLog(@"There was an error in %s: %@, %@", __PRETTY_FUNCTION__, error, [error localizedDescription]);
+            completion(nil);
+            return;
+        }
+        
+        // Handle the response
+        if (response)
+        {
+            NSLog(@"Response: %@", response);
+        }
+        
+        // Handle the data
+        if (!data)
+        {
+            NSLog(@"%@", error);
+            completion(nil);
+            return;
+        }
+        
+        // Now we have data
+        UIImage *image = [UIImage imageWithData:data];
+        completion(image);
+        
+    }]resume];
 }
 
 @end
