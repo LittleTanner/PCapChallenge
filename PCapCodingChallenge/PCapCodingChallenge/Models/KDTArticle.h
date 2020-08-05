@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KDTArticle (JSONConvertable)
 
-+ (NSArray<KDTArticle *> *)initWithDictionary: (NSDictionary<NSString *, id> *)topLevelDictionary;
+- (instancetype)initWithDictionary: (NSDictionary<NSString *, id> *)dictionary;
 
 @end
 

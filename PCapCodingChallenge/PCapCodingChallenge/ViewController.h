@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KDTArticleController.h"
 
 @interface ViewController : UIViewController
 

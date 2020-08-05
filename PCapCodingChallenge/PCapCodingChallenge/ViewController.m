@@ -18,6 +18,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.view.backgroundColor = [UIColor blueColor];
+    [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles) {
+        NSLog(@"%@", articles);
+    }];
 }
 
 
