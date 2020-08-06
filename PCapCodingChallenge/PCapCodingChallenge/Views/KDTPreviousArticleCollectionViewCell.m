@@ -42,15 +42,15 @@
     _articleTitleLabel.numberOfLines = 2;
     _articleTitleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     
-    [_articleImageView.topAnchor constraintEqualToAnchor:self.contentView.topAnchor constant:0].active = true;
-    [_articleImageView.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:4].active = true;
-    [_articleImageView.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-4].active = true;
+    [_articleImageView.topAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.topAnchor constant:0].active = true;
+    [_articleImageView.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [_articleImageView.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
     [_articleImageView.bottomAnchor constraintEqualToAnchor:_articleTitleLabel.topAnchor constant:-4].active = true;
     
     [_articleTitleLabel.topAnchor constraintEqualToAnchor:_articleImageView.bottomAnchor constant:4].active = true;
-    [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.leadingAnchor constant:8].active = true;
-    [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.trailingAnchor constant:-8].active = true;
-    [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.contentView.bottomAnchor constant:-4].active = true;
+    [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:12].active = true;
+    [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-12].active = true;
+    [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-4].active = true;
 }
 
 @end

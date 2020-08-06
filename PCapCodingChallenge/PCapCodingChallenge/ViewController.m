@@ -21,6 +21,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 @property (nonatomic, readwrite) NSMutableArray *articleImages;
 
 - (void) fetchArticles;
+- (void) setupArticleCollectionView;
+//- (void) setupOrientationNotification;
+//- (void) orientationChanged:(NSNotification *)note;
 
 @end
 
@@ -29,6 +32,15 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self setupArticleCollectionView];
+//    [self setupOrientationNotification];
+    [self fetchArticles];
+}
+
+// MARK: - UI Helper Methods
+
+- (void) setupArticleCollectionView
+{
     UICollectionViewFlowLayout *articleCollectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     _articleCollectionView = [[KDTArticleCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
     _articleCollectionView.delegate = self;
@@ -43,13 +55,10 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     
     _articleCollectionView.translatesAutoresizingMaskIntoConstraints = false;
     [_articleCollectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
-    [_articleCollectionView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0].active = true;
-    [_articleCollectionView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0].active = true;
+    [_articleCollectionView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:0].active = true;
+    [_articleCollectionView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:0].active = true;
     [_articleCollectionView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = true;
-    
-    [self fetchArticles];
 }
-
 
 // MARK: - Helper Methods
 
@@ -63,6 +72,46 @@ static NSString * const previousArticleCell = @"previousArticleCell";
                 [self.articleCollectionView reloadData];
             });
         }];
+}
+
+//- (void) setupOrientationNotification
+//{
+//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+//    [[NSNotificationCenter defaultCenter]
+//       addObserver:self selector:@selector(orientationChanged:)
+//       name:UIDeviceOrientationDidChangeNotification
+//       object:[UIDevice currentDevice]];
+//}
+//
+//- (void) orientationChanged:(NSNotification *)note
+//{
+//    UIDevice * device = note.object;
+//    switch(device.orientation)
+//    {
+//        case UIDeviceOrientationPortrait:
+////            [self setupArticleCollectionView];
+////            [_articleCollectionView reloadData];
+//            break;
+//
+//        case UIDeviceOrientationLandscapeLeft:
+////            [self setupArticleCollectionView];
+////            [_articleCollectionView reloadData];
+//            break;
+//
+//        case UIDeviceOrientationLandscapeRight:
+////            [self setupArticleCollectionView];
+////            [_articleCollectionView reloadData];
+//            break;
+//
+//        default:
+////            [self setupArticleCollectionView];
+//            break;
+//    };
+//}
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator: (id<UIViewControllerTransitionCoordinator>)coordinator
+{
+    [self.articleCollectionView reloadData];
 }
 
 // MARK: - Collection View Methods
@@ -111,11 +160,21 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 {
     if (indexPath.row == 0)
     {
-        return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2.25);
+        return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2);
     }
     else
     {
-        return CGSizeMake(self.view.frame.size.width / 2.1, self.view.frame.size.height / 5);
+        
+        if (self.view.frame.size.height < self.view.frame.size.width)
+        {
+            return CGSizeMake(self.view.frame.size.width / 2.25, self.view.frame.size.height / 2.5);
+        }
+        else
+        {
+            return CGSizeMake((self.view.frame.size.width / 2) - 10, self.view.frame.size.height / 5);
+        }
+        
+//        return CGSizeMake(self.view.frame.size.width / 2.25, self.view.frame.size.height / 5);
     }
 }
 
