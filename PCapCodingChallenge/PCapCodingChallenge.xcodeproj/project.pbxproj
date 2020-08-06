@@ -80,12 +80,7 @@
 				FC2E49C024DB3FA200A58E03 /* Model Controller */,
 				FC2E499D24DA0ACA00A58E03 /* ViewController.h */,
 				FC2E499E24DA0ACA00A58E03 /* ViewController.m */,
-				FC642B7B24DC5D69003BC244 /* KDTArticleCollectionView.h */,
-				FC642B7C24DC5D69003BC244 /* KDTArticleCollectionView.m */,
-				FC642B7E24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.h */,
-				FC642B7F24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m */,
-				FC642B8624DCA5B7003BC244 /* KDTPreviousArticleCollectionViewCell.h */,
-				FC642B8724DCA5B7003BC244 /* KDTPreviousArticleCollectionViewCell.m */,
+				FC642B8924DCB9D1003BC244 /* Views */,
 				FC2E49B024DA10B300A58E03 /* Resources */,
 			);
 			path = PCapCodingChallenge;
@@ -123,6 +118,19 @@
 				FC2E49C224DB3FCB00A58E03 /* KDTArticleController.m */,
 			);
 			path = "Model Controller";
+			sourceTree = "<group>";
+		};
+		FC642B8924DCB9D1003BC244 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				FC642B7B24DC5D69003BC244 /* KDTArticleCollectionView.h */,
+				FC642B7C24DC5D69003BC244 /* KDTArticleCollectionView.m */,
+				FC642B7E24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.h */,
+				FC642B7F24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m */,
+				FC642B8624DCA5B7003BC244 /* KDTPreviousArticleCollectionViewCell.h */,
+				FC642B8724DCA5B7003BC244 /* KDTPreviousArticleCollectionViewCell.m */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
