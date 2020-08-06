@@ -29,35 +29,6 @@ static NSString * const contentHTMLKey = @"content_html";
 
 @end
 
-//@implementation KDTArticle (JSONConvertable)
-//
-//- (NSArray<KDTArticle *> *)initWithDictionary:(NSDictionary<NSString *,id> *)topLevelDictionary
-//{
-//    NSArray *articleEntries = topLevelDictionary[@"items"];
-//
-//    NSMutableArray<KDTArticle *> *articles = [[NSMutableArray alloc] init];
-//
-//    // Needed if items are nil
-//    if ([articleEntries isKindOfClass:[NSArray class]])
-//    {
-//        return nil;
-//    }
-//
-//    for (NSDictionary *articleDict in articleEntries)
-//    {
-//        NSString *title = articleDict[titleKey];
-//        NSString *featuredImagePath = articleDict[featuredImageKey];
-//        NSString *summary = articleDict[summaryKey];
-//        NSString *contentHTML = articleDict[contentHTMLKey];
-//        KDTArticle *entry = [[KDTArticle alloc] initWithTitle:title featuredImagePath:featuredImagePath summary:summary contentHTML:contentHTML];
-//        [articles addObject: entry];
-//    }
-//
-//    return [articles copy];
-//}
-//@end
-
-
 @implementation KDTArticle (JSONConvertable)
 
 - (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary

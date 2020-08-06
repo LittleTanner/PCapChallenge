@@ -7,11 +7,20 @@
 //
 
 #import "ViewController.h"
+#import "KDTArticleCollectionView.h"
+#import "KDTFeaturedArticleCollectionViewCell.h"
+#import "KDTPreviousArticleCollectionViewCell.h"
 
-@interface ViewController ()<UITableViewDelegate, UITableViewDataSource>
+static NSString * const featuredArticleCell = @"featuredArticleCell";
+static NSString * const previousArticleCell = @"previousArticleCell";
 
-@property (nonatomic, strong) UITableView *tableView;
+@interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+
+@property (nonatomic, strong) KDTArticleCollectionView *articleCollectionView;
 @property (nonatomic, readwrite) NSMutableArray *articleEntries;
+@property (nonatomic, readwrite) NSMutableArray *articleImages;
+
+- (void) fetchArticles;
 
 @end
 
@@ -19,67 +28,95 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    UICollectionViewFlowLayout *articleCollectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    _articleCollectionView = [[KDTArticleCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
+    _articleCollectionView.delegate = self;
+    _articleCollectionView.dataSource = self;
     
-    _tableView = [[UITableView alloc] initWithFrame: self.view.bounds style:UITableViewStylePlain];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
-    [self.view addSubview:_tableView];
+    [_articleCollectionView registerClass:[KDTFeaturedArticleCollectionViewCell class] forCellWithReuseIdentifier:featuredArticleCell];
+    [_articleCollectionView registerClass:[KDTPreviousArticleCollectionViewCell class] forCellWithReuseIdentifier:previousArticleCell];
     
-    self.view.backgroundColor = [UIColor blueColor];
+    [self.view addSubview:_articleCollectionView];
+    
+    _articleCollectionView.backgroundColor = [UIColor whiteColor];
+    
+    _articleCollectionView.translatesAutoresizingMaskIntoConstraints = false;
+    [_articleCollectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
+    [_articleCollectionView.leadingAnchor constraintEqualToAnchor:self.view.leadingAnchor constant:0].active = true;
+    [_articleCollectionView.trailingAnchor constraintEqualToAnchor:self.view.trailingAnchor constant:0].active = true;
+    [_articleCollectionView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = true;
+    
+    [self fetchArticles];
+}
+
+
+// MARK: - Helper Methods
+
+- (void)fetchArticles
+{
     [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles) {
-        [[articles objectAtIndex:0] valueForKey:@"title"];
-        NSLog(@"%@, %@, %@, %@", [[articles objectAtIndex:0] valueForKey:@"title"], [[articles objectAtIndex:0] valueForKey:@"featuredImagePath"], [[articles objectAtIndex:0] valueForKey:@"summary"], [[articles objectAtIndex:0] valueForKey:@"contentHTML"]);
 
-        self.articleEntries = articles;
-        dispatch_async(dispatch_get_main_queue(), ^
-        {
-            [self.tableView reloadData];
-        });
-        [KDTArticleController fetchImageForArticle:[articles objectAtIndex:0] completion:^(UIImage * _Nonnull image) {
-            NSLog(@"image: %@", image);
+            self.articleEntries = articles;
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [self.articleCollectionView reloadData];
+            });
         }];
-    }];
 }
 
+// MARK: - Collection View Methods
 
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 3;
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    
+    return [_articleEntries count];
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath
-{
-    static NSString *cellIdentifier = @"cell";
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
-    
-    if (cell == nil)
+    if (indexPath.row == 0)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        KDTFeaturedArticleCollectionViewCell *featuredCell = [collectionView dequeueReusableCellWithReuseIdentifier:featuredArticleCell forIndexPath:indexPath];
+        
+        [KDTArticleController fetchImageForArticle:[_articleEntries objectAtIndex:indexPath.row] completion:^(UIImage * _Nonnull image) {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [featuredCell featuredImageView].image = image;
+            });
+        }];
+        
+        [featuredCell articleTitleLabel].text = [_articleEntries[indexPath.row] title];
+        [featuredCell articleSummaryLabel].text = [_articleEntries[indexPath.row] summary];
+
+        return featuredCell;
     }
-    
-    cell.backgroundView = [[UIView alloc] init];
-    
-    
-    
-    
-    dispatch_async(dispatch_get_main_queue(), ^
+    else
     {
-        cell.textLabel.text = [[self.articleEntries objectAtIndex:indexPath.row] valueForKey:@"title"];
-    });
-    
-    [KDTArticleController fetchImageForArticle:[_articleEntries objectAtIndex:0] completion:^(UIImage * _Nonnull image) {
-        dispatch_async(dispatch_get_main_queue(), ^
-                       {
-            cell.imageView.image = image;
-        });
-    }];
-    
-    return cell;
+        KDTPreviousArticleCollectionViewCell *previousCell = [collectionView dequeueReusableCellWithReuseIdentifier:previousArticleCell forIndexPath:indexPath];
+        
+        [KDTArticleController fetchImageForArticle:[_articleEntries objectAtIndex:indexPath.row] completion:^(UIImage * _Nonnull image) {
+            dispatch_async(dispatch_get_main_queue(), ^
+            {
+                [previousCell articleImageView].image = image;
+            });
+        }];
+        
+        [previousCell articleTitleLabel].text = [_articleEntries[indexPath.row] title];
+        
+        return previousCell;
+    }
 }
 
-
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0)
+    {
+        return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2.25);
+    }
+    else
+    {
+        return CGSizeMake(self.view.frame.size.width / 2.1, self.view.frame.size.height / 5);
+    }
+}
 
 @end

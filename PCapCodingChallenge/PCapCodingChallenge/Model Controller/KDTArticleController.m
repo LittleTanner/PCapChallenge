@@ -16,8 +16,9 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
 {
     // Base URL: https://www.personalcapital.com/blog/feed/json
     NSURL *finalURL = [NSURL URLWithString:baseURLString];
+    
     // Print URL for testing
-    NSLog(@"finalURL: %@", finalURL);
+//    NSLog(@"finalURL: %@", finalURL);
     
     // Data Task
     [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -33,7 +34,7 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
         // Handle the response
         if (response)
         {
-            NSLog(@"Response: %@", response);
+//            NSLog(@"Response: %@", response);
         }
         
         // Handle the data
@@ -67,7 +68,8 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
 {
     // URL
     NSURL *imageURL = [NSURL URLWithString:[article featuredImagePath]];
-    NSLog(@"%@", imageURL);
+    // Print the imageURL
+//    NSLog(@"%@", imageURL);
     
     [[[NSURLSession sharedSession] dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Check for error
@@ -81,7 +83,7 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
         // Handle the response
         if (response)
         {
-            NSLog(@"Response: %@", response);
+//            NSLog(@"Response: %@", response);
         }
         
         // Handle the data
