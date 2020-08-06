@@ -16,6 +16,8 @@
 		FC2E49AA24DA0ACC00A58E03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E49A924DA0ACC00A58E03 /* main.m */; };
 		FC2E49BF24DA3A8200A58E03 /* KDTArticle.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E49BE24DA3A8200A58E03 /* KDTArticle.m */; };
 		FC2E49C324DB3FCB00A58E03 /* KDTArticleController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E49C224DB3FCB00A58E03 /* KDTArticleController.m */; };
+		FC642B7D24DC5D69003BC244 /* KDTArticleCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC642B7C24DC5D69003BC244 /* KDTArticleCollectionView.m */; };
+		FC642B8024DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC642B7F24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +37,10 @@
 		FC2E49BE24DA3A8200A58E03 /* KDTArticle.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KDTArticle.m; sourceTree = "<group>"; };
 		FC2E49C124DB3FCB00A58E03 /* KDTArticleController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KDTArticleController.h; sourceTree = "<group>"; };
 		FC2E49C224DB3FCB00A58E03 /* KDTArticleController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KDTArticleController.m; sourceTree = "<group>"; };
+		FC642B7B24DC5D69003BC244 /* KDTArticleCollectionView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KDTArticleCollectionView.h; sourceTree = "<group>"; };
+		FC642B7C24DC5D69003BC244 /* KDTArticleCollectionView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KDTArticleCollectionView.m; sourceTree = "<group>"; };
+		FC642B7E24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KDTFeaturedArticleCollectionViewCell.h; sourceTree = "<group>"; };
+		FC642B7F24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KDTFeaturedArticleCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,10 @@
 				FC2E49C024DB3FA200A58E03 /* Model Controller */,
 				FC2E499D24DA0ACA00A58E03 /* ViewController.h */,
 				FC2E499E24DA0ACA00A58E03 /* ViewController.m */,
+				FC642B7B24DC5D69003BC244 /* KDTArticleCollectionView.h */,
+				FC642B7C24DC5D69003BC244 /* KDTArticleCollectionView.m */,
+				FC642B7E24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.h */,
+				FC642B7F24DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m */,
 				FC2E49B024DA10B300A58E03 /* Resources */,
 			);
 			path = PCapCodingChallenge;
@@ -186,7 +196,9 @@
 				FC2E499924DA0ACA00A58E03 /* AppDelegate.m in Sources */,
 				FC2E49AA24DA0ACC00A58E03 /* main.m in Sources */,
 				FC2E49BF24DA3A8200A58E03 /* KDTArticle.m in Sources */,
+				FC642B7D24DC5D69003BC244 /* KDTArticleCollectionView.m in Sources */,
 				FC2E499C24DA0ACA00A58E03 /* SceneDelegate.m in Sources */,
+				FC642B8024DC672E003BC244 /* KDTFeaturedArticleCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
