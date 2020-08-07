@@ -171,7 +171,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:webConfig];
     
     UINavigationController *webViewNavController = [[UINavigationController alloc] init];
-    UINavigationBar *webViewNavBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    UINavigationBar *webViewNavBar = [[UINavigationBar alloc] initWithFrame:CGRectZero];
     
     webViewNavController.view.backgroundColor = [UIColor whiteColor];
     
@@ -193,10 +193,13 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [webView.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
     [webView.bottomAnchor constraintEqualToAnchor:webViewNavController.view.bottomAnchor].active = true;
     
+    webViewNavBar.translatesAutoresizingMaskIntoConstraints = false;
+    [webViewNavBar.topAnchor constraintEqualToAnchor: webViewNavController.view.topAnchor].active = true;
+    [webViewNavBar.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [webViewNavBar.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
+    [webViewNavBar.heightAnchor constraintEqualToConstant:44].active = true;
+    
     [self presentViewController:webViewNavController animated:false completion:nil];
-    
-    
-//    [self.view addSubview:webView];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -210,14 +213,24 @@ static NSString * const previousArticleCell = @"previousArticleCell";
         
         if (self.view.frame.size.height < self.view.frame.size.width)
         {
-            return CGSizeMake(self.view.frame.size.width / 2.25, self.view.frame.size.height / 2.5);
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+                // iPad
+                return CGSizeMake(self.view.frame.size.width / 3.25, self.view.frame.size.height / 2.5);
+            }else{
+                // iPhone
+                return CGSizeMake(self.view.frame.size.width / 2.25, self.view.frame.size.height / 2.5);
+            }
         }
         else
         {
-            return CGSizeMake((self.view.frame.size.width / 2) - 10, self.view.frame.size.height / 5);
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+                // iPad
+                return CGSizeMake((self.view.frame.size.width / 3) - 10, self.view.frame.size.height / 5);
+            }else{
+                // iPhone
+                return CGSizeMake((self.view.frame.size.width / 2) - 10, self.view.frame.size.height / 5);
+            }
         }
-        
-//        return CGSizeMake(self.view.frame.size.width / 2.25, self.view.frame.size.height / 5);
     }
 }
 
