@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "KDTArticle.h"
+#import "KDTArticleController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) UILabel *articleTitleLabel;
 
 - (void)setupUI;
+- (void)configureWithArticle: (KDTArticle *)article;
 
 @end
 

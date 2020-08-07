@@ -10,7 +10,6 @@
 
 @implementation KDTPreviousArticleCollectionViewCell
 
-
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -51,6 +50,16 @@
     [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:12].active = true;
     [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-12].active = true;
     [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-4].active = true;
+}
+
+- (void)configureWithArticle: (KDTArticle *)article
+{
+    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.articleImageView.image = image;
+            self.articleTitleLabel.text = [article title];
+        });
+    }];
 }
 
 @end

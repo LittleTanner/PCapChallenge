@@ -64,4 +64,15 @@
     [_articleSummaryLabel.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-4].active = true;
 }
 
+- (void)configureWithArticle: (KDTArticle *)article
+{
+    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.featuredImageView.image = image;
+            self.articleTitleLabel.text = [article title];
+            self.articleSummaryLabel.text = [article summary];
+        });
+    }];
+}
+
 @end

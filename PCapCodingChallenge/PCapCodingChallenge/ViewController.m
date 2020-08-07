@@ -39,6 +39,12 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [self fetchArticles];
 }
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [_articleCollectionView reloadData];
+}
+
 // MARK: - UI Helper Methods
 
 - (void) setupArticleCollectionView
@@ -67,13 +73,16 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 - (void)fetchArticles
 {
     [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles) {
-
+        
+        
+//        for ()
+        
+        dispatch_async(dispatch_get_main_queue(), ^ {
             self.articleEntries = articles;
-            dispatch_async(dispatch_get_main_queue(), ^
-            {
-                [self.articleCollectionView reloadData];
-            });
-        }];
+            [self.articleCollectionView reloadData];
+            NSLog(@"Fetched Articles");
+        });
+    }];
 }
 
 - (void)onTapDismiss
@@ -134,30 +143,15 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     {
         KDTFeaturedArticleCollectionViewCell *featuredCell = [collectionView dequeueReusableCellWithReuseIdentifier:featuredArticleCell forIndexPath:indexPath];
         
-        [KDTArticleController fetchImageForArticle:[_articleEntries objectAtIndex:indexPath.row] completion:^(UIImage * _Nonnull image) {
-            dispatch_async(dispatch_get_main_queue(), ^
-            {
-                [featuredCell featuredImageView].image = image;
-            });
-        }];
+        [featuredCell configureWithArticle:_articleEntries[indexPath.row]];
         
-        [featuredCell articleTitleLabel].text = [_articleEntries[indexPath.row] title];
-        [featuredCell articleSummaryLabel].text = [_articleEntries[indexPath.row] summary];
-
         return featuredCell;
     }
     else
     {
         KDTPreviousArticleCollectionViewCell *previousCell = [collectionView dequeueReusableCellWithReuseIdentifier:previousArticleCell forIndexPath:indexPath];
         
-        [KDTArticleController fetchImageForArticle:[_articleEntries objectAtIndex:indexPath.row] completion:^(UIImage * _Nonnull image) {
-            dispatch_async(dispatch_get_main_queue(), ^
-            {
-                [previousCell articleImageView].image = image;
-            });
-        }];
-        
-        [previousCell articleTitleLabel].text = [_articleEntries[indexPath.row] title];
+        [previousCell configureWithArticle:_articleEntries[indexPath.row]];
         
         return previousCell;
     }
@@ -165,7 +159,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Cell Tapped: %@", [_articleEntries[indexPath.row] title]);
+    NSLog(@"Cell Index: %ld", (long)indexPath.row);
     
     WKWebViewConfiguration *webConfig = [[WKWebViewConfiguration alloc] init];
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:webConfig];
@@ -195,8 +189,8 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     
     webViewNavBar.translatesAutoresizingMaskIntoConstraints = false;
     [webViewNavBar.topAnchor constraintEqualToAnchor: webViewNavController.view.topAnchor].active = true;
-    [webViewNavBar.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
-    [webViewNavBar.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
+    [webViewNavBar.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor constant:0].active = true;
+    [webViewNavBar.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:0].active = true;
     [webViewNavBar.heightAnchor constraintEqualToConstant:44].active = true;
     
     [self presentViewController:webViewNavController animated:false completion:nil];
