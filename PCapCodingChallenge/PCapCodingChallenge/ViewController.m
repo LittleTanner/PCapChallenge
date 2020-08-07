@@ -10,6 +10,7 @@
 #import "KDTArticleCollectionView.h"
 #import "KDTFeaturedArticleCollectionViewCell.h"
 #import "KDTPreviousArticleCollectionViewCell.h"
+#import <WebKit/WebKit.h>
 
 static NSString * const featuredArticleCell = @"featuredArticleCell";
 static NSString * const previousArticleCell = @"previousArticleCell";
@@ -20,8 +21,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 @property (nonatomic, readwrite) NSMutableArray *articleEntries;
 @property (nonatomic, readwrite) NSMutableArray *articleImages;
 
-- (void) fetchArticles;
-- (void) setupArticleCollectionView;
+- (void)fetchArticles;
+- (void)setupArticleCollectionView;
+- (void)onTapDismiss;
 //- (void) setupOrientationNotification;
 //- (void) orientationChanged:(NSNotification *)note;
 
@@ -72,6 +74,11 @@ static NSString * const previousArticleCell = @"previousArticleCell";
                 [self.articleCollectionView reloadData];
             });
         }];
+}
+
+- (void)onTapDismiss
+{
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 //- (void) setupOrientationNotification
@@ -154,6 +161,42 @@ static NSString * const previousArticleCell = @"previousArticleCell";
         
         return previousCell;
     }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Cell Tapped: %@", [_articleEntries[indexPath.row] title]);
+    
+    WKWebViewConfiguration *webConfig = [[WKWebViewConfiguration alloc] init];
+    WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:webConfig];
+    
+    UINavigationController *webViewNavController = [[UINavigationController alloc] init];
+    UINavigationBar *webViewNavBar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)];
+    
+    webViewNavController.view.backgroundColor = [UIColor whiteColor];
+    
+    [webViewNavController.view addSubview:webView];
+    [webViewNavController.view addSubview:webViewNavBar];
+    
+    UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:[_articleEntries[indexPath.row] title]];
+    
+    UIBarButtonItem *dismissButton = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone target:self action:@selector(onTapDismiss)];
+    navTitle.rightBarButtonItem = dismissButton;
+    
+    [webViewNavBar setItems: @[navTitle]];
+    
+    [webView loadHTMLString:[_articleEntries[indexPath.row] contentHTML] baseURL:nil];
+
+    webView.translatesAutoresizingMaskIntoConstraints = false;
+    [webView.topAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.topAnchor constant:60].active = true;
+    [webView.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [webView.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
+    [webView.bottomAnchor constraintEqualToAnchor:webViewNavController.view.bottomAnchor].active = true;
+    
+    [self presentViewController:webViewNavController animated:false completion:nil];
+    
+    
+//    [self.view addSubview:webView];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
