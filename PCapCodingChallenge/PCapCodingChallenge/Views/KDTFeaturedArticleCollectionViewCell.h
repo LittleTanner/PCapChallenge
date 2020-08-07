@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic) UIImageView *featuredImageView;
 @property (nonatomic, copy) UILabel *articleTitleLabel;
 @property (nonatomic, copy) UILabel *articleSummaryLabel;
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (void)setupUI;
 - (void)configureWithArticle: (KDTArticle *)article;

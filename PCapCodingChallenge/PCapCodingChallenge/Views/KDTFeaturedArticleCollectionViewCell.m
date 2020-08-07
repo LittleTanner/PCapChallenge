@@ -39,6 +39,13 @@
     _articleSummaryLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.contentView addSubview:_articleSummaryLabel];
     
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+    _activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
+    [self.contentView addSubview:_activityIndicator];
+    
+    _activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
+    _activityIndicator.clipsToBounds = true;
+    
     _featuredImageView.contentMode = UIViewContentModeScaleAspectFill;
     _featuredImageView.clipsToBounds = true;
     
@@ -47,6 +54,11 @@
     
     _articleSummaryLabel.numberOfLines = 2;
     _articleSummaryLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightLight];
+    
+    [_activityIndicator.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = true;
+    [_activityIndicator.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor].active = true;
+    [_activityIndicator.heightAnchor constraintEqualToConstant:40].active = true;
+    [_activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
     
     [_featuredImageView.topAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.topAnchor constant:0].active = true;
     [_featuredImageView.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:0].active = true;
@@ -66,11 +78,13 @@
 
 - (void)configureWithArticle: (KDTArticle *)article
 {
+    [_activityIndicator startAnimating];
     [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.featuredImageView.image = image;
             self.articleTitleLabel.text = [article title];
             self.articleSummaryLabel.text = [article summary];
+            [self.activityIndicator stopAnimating];
         });
     }];
 }

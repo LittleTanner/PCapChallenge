@@ -20,10 +20,12 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 @property (nonatomic, strong) KDTArticleCollectionView *articleCollectionView;
 @property (nonatomic, readwrite) NSMutableArray *articleEntries;
 @property (nonatomic, readwrite) NSMutableArray *articleImages;
+@property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (void)fetchArticles;
 - (void)setupArticleCollectionView;
 - (void)onTapDismiss;
+- (void)setupActivityIndicator;
 //- (void) setupOrientationNotification;
 //- (void) orientationChanged:(NSNotification *)note;
 
@@ -35,7 +37,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [super viewDidLoad];
 
     [self setupArticleCollectionView];
+    [self setupActivityIndicator];
 //    [self setupOrientationNotification];
+    [_activityIndicator startAnimating];
     [self fetchArticles];
 }
 
@@ -68,19 +72,31 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [_articleCollectionView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = true;
 }
 
+- (void)setupActivityIndicator
+{
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+    _activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
+    [self.view addSubview:_activityIndicator];
+    
+    _activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
+    _activityIndicator.clipsToBounds = true;
+    
+    [_activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
+    [_activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
+    [_activityIndicator.heightAnchor constraintEqualToConstant:40].active = true;
+    [_activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
+}
+
 // MARK: - Helper Methods
 
 - (void)fetchArticles
 {
     [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles) {
-        
-        
-//        for ()
-        
         dispatch_async(dispatch_get_main_queue(), ^ {
             self.articleEntries = articles;
             [self.articleCollectionView reloadData];
             NSLog(@"Fetched Articles");
+            [self.activityIndicator stopAnimating];
         });
     }];
 }

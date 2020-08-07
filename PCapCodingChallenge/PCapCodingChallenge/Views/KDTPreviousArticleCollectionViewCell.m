@@ -35,6 +35,13 @@
     _articleTitleLabel.translatesAutoresizingMaskIntoConstraints = false;
     [self.contentView addSubview:_articleTitleLabel];
     
+    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+    _activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
+    [self.contentView addSubview:_activityIndicator];
+    
+    _activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
+    _activityIndicator.clipsToBounds = true;
+    
     _articleImageView.contentMode = UIViewContentModeScaleAspectFill;
     _articleImageView.clipsToBounds = true;
     
@@ -54,10 +61,12 @@
 
 - (void)configureWithArticle: (KDTArticle *)article
 {
+    [_activityIndicator startAnimating];
     [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.articleImageView.image = image;
             self.articleTitleLabel.text = [article title];
+            [self.activityIndicator stopAnimating];
         });
     }];
 }
