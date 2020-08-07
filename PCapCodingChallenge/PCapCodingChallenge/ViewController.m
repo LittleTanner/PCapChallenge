@@ -25,9 +25,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 - (void)fetchArticles;
 - (void)setupArticleCollectionView;
 - (void)onTapDismiss;
+- (void)onTapRefresh;
 - (void)setupActivityIndicator;
-//- (void) setupOrientationNotification;
-//- (void) orientationChanged:(NSNotification *)note;
+- (void)setupNavigationBar;
 
 @end
 
@@ -36,9 +36,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    [self setupNavigationBar];
     [self setupArticleCollectionView];
     [self setupActivityIndicator];
-//    [self setupOrientationNotification];
     [_activityIndicator startAnimating];
     [self fetchArticles];
 }
@@ -87,6 +87,13 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [_activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
 }
 
+- (void)setupNavigationBar
+{
+    self.navigationItem.title = @"Personal Capital";
+    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"arrow.clockwise"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapRefresh)];
+    self.navigationItem.rightBarButtonItem = refreshButton;
+}
+
 // MARK: - Helper Methods
 
 - (void)fetchArticles
@@ -106,40 +113,12 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [self dismissViewControllerAnimated:true completion:nil];
 }
 
-//- (void) setupOrientationNotification
-//{
-//    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-//    [[NSNotificationCenter defaultCenter]
-//       addObserver:self selector:@selector(orientationChanged:)
-//       name:UIDeviceOrientationDidChangeNotification
-//       object:[UIDevice currentDevice]];
-//}
-//
-//- (void) orientationChanged:(NSNotification *)note
-//{
-//    UIDevice * device = note.object;
-//    switch(device.orientation)
-//    {
-//        case UIDeviceOrientationPortrait:
-////            [self setupArticleCollectionView];
-////            [_articleCollectionView reloadData];
-//            break;
-//
-//        case UIDeviceOrientationLandscapeLeft:
-////            [self setupArticleCollectionView];
-////            [_articleCollectionView reloadData];
-//            break;
-//
-//        case UIDeviceOrientationLandscapeRight:
-////            [self setupArticleCollectionView];
-////            [_articleCollectionView reloadData];
-//            break;
-//
-//        default:
-////            [self setupArticleCollectionView];
-//            break;
-//    };
-//}
+- (void)onTapRefresh
+{
+    [_activityIndicator startAnimating];
+    _articleEntries = nil;
+    [self fetchArticles];
+}
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator: (id<UIViewControllerTransitionCoordinator>)coordinator
 {
