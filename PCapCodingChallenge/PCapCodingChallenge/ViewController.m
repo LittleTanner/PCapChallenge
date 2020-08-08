@@ -134,11 +134,11 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     
-    if (indexPath.row == 0)
+    if (indexPath.item == 0)
     {
         KDTFeaturedArticleCollectionViewCell *featuredCell = [collectionView dequeueReusableCellWithReuseIdentifier:featuredArticleCell forIndexPath:indexPath];
         
-        [featuredCell configureWithArticle:_articleEntries[indexPath.row]];
+        [featuredCell configureWithArticle:_articleEntries[indexPath.item]];
         
         return featuredCell;
     }
@@ -146,7 +146,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     {
         KDTPreviousArticleCollectionViewCell *previousCell = [collectionView dequeueReusableCellWithReuseIdentifier:previousArticleCell forIndexPath:indexPath];
         
-        [previousCell configureWithArticle:_articleEntries[indexPath.row]];
+        [previousCell configureWithArticle:_articleEntries[indexPath.item]];
         
         return previousCell;
     }
@@ -154,7 +154,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Cell Index: %ld", (long)indexPath.row);
+    NSLog(@"Cell Index: %ld", (long)indexPath.item);
     
     WKWebViewConfiguration *webConfig = [[WKWebViewConfiguration alloc] init];
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:webConfig];
@@ -167,14 +167,14 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [webViewNavController.view addSubview:webView];
     [webViewNavController.view addSubview:webViewNavBar];
     
-    UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:[_articleEntries[indexPath.row] title]];
+    UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:[_articleEntries[indexPath.item] title]];
     
     UIBarButtonItem *dismissButton = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone target:self action:@selector(onTapDismiss)];
     navTitle.rightBarButtonItem = dismissButton;
     
     [webViewNavBar setItems: @[navTitle]];
     
-    [webView loadHTMLString:[_articleEntries[indexPath.row] contentHTML] baseURL:nil];
+    [webView loadHTMLString:[_articleEntries[indexPath.item] contentHTML] baseURL:nil];
 
     webView.translatesAutoresizingMaskIntoConstraints = false;
     [webView.topAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.topAnchor constant:60].active = true;
@@ -193,7 +193,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 0)
+    if (indexPath.item == 0)
     {
         return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2);
     }
