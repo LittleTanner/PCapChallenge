@@ -56,13 +56,15 @@
     [_articleTitleLabel.topAnchor constraintEqualToAnchor:_articleImageView.bottomAnchor constant:4].active = true;
     [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:12].active = true;
     [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-12].active = true;
+    [_articleTitleLabel.heightAnchor constraintEqualToConstant:34].active = true;
     [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-4].active = true;
 }
 
 - (void)configureWithArticle: (KDTArticle *)article
 {
     [_activityIndicator startAnimating];
-    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
+    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.articleImageView.image = image;
             self.articleTitleLabel.text = [article title];

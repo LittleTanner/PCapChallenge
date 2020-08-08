@@ -79,7 +79,8 @@
 - (void)configureWithArticle: (KDTArticle *)article
 {
     [_activityIndicator startAnimating];
-    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
+    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
+    {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.featuredImageView.image = image;
             self.articleTitleLabel.text = [article title];

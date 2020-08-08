@@ -21,8 +21,8 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
 //    NSLog(@"finalURL: %@", finalURL);
     
     // Data Task
-    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        
+    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+    {
         // Handle the error
         if (error)
         {
@@ -71,7 +71,8 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
     // Print the imageURL
 //    NSLog(@"%@", imageURL);
     
-    [[[NSURLSession sharedSession] dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    [[[NSURLSession sharedSession] dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
+    {
         // Check for error
         if (error)
         {

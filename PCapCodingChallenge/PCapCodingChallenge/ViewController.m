@@ -33,7 +33,8 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 @implementation ViewController
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
     [self setupNavigationBar];
@@ -98,7 +99,8 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)fetchArticles
 {
-    [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles) {
+    [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles)
+    {
         dispatch_async(dispatch_get_main_queue(), ^ {
             self.articleEntries = articles;
             [self.articleCollectionView reloadData];
@@ -127,13 +129,13 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 // MARK: - Collection View Methods
 
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
     return [_articleEntries count];
 }
 
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
+{
     if (indexPath.item == 0)
     {
         KDTFeaturedArticleCollectionViewCell *featuredCell = [collectionView dequeueReusableCellWithReuseIdentifier:featuredArticleCell forIndexPath:indexPath];
@@ -199,23 +201,30 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     }
     else
     {
-        
+        // Landscape Mode
         if (self.view.frame.size.height < self.view.frame.size.width)
         {
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
+            {
                 // iPad
                 return CGSizeMake(self.view.frame.size.width / 3.25, self.view.frame.size.height / 2.5);
-            }else{
+            }
+            else
+            {
                 // iPhone
-                return CGSizeMake(self.view.frame.size.width / 2.25, self.view.frame.size.height / 2.5);
+                return CGSizeMake(self.view.frame.size.width / 2.3, self.view.frame.size.height / 2.5);
             }
         }
+        // Portrait Mode
         else
         {
-            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad) {
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
+            {
                 // iPad
                 return CGSizeMake((self.view.frame.size.width / 3) - 10, self.view.frame.size.height / 5);
-            }else{
+            }
+            else
+            {
                 // iPhone
                 return CGSizeMake((self.view.frame.size.width / 2) - 10, self.view.frame.size.height / 5);
             }
