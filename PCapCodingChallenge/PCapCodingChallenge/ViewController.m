@@ -59,6 +59,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     _articleCollectionView.delegate = self;
     _articleCollectionView.dataSource = self;
     
+    articleCollectionFlowLayout.minimumLineSpacing = 0;
+    articleCollectionFlowLayout.minimumInteritemSpacing = 0;
+    
     [_articleCollectionView registerClass:[KDTFeaturedArticleCollectionViewCell class] forCellWithReuseIdentifier:featuredArticleCell];
     [_articleCollectionView registerClass:[KDTPreviousArticleCollectionViewCell class] forCellWithReuseIdentifier:previousArticleCell];
     
@@ -118,7 +121,6 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 - (void)onTapRefresh
 {
     [_activityIndicator startAnimating];
-    _articleEntries = nil;
     [self fetchArticles];
 }
 
@@ -186,8 +188,8 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     
     webViewNavBar.translatesAutoresizingMaskIntoConstraints = false;
     [webViewNavBar.topAnchor constraintEqualToAnchor: webViewNavController.view.topAnchor].active = true;
-    [webViewNavBar.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor constant:0].active = true;
-    [webViewNavBar.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:0].active = true;
+    [webViewNavBar.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor].active = true;
+    [webViewNavBar.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor].active = true;
     [webViewNavBar.heightAnchor constraintEqualToConstant:44].active = true;
     
     [self presentViewController:webViewNavController animated:false completion:nil];
@@ -207,12 +209,12 @@ static NSString * const previousArticleCell = @"previousArticleCell";
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
             {
                 // iPad
-                return CGSizeMake(self.view.frame.size.width / 3.25, self.view.frame.size.height / 2.5);
+                return CGSizeMake(self.view.frame.size.width / 3, self.view.frame.size.height / 2.5);
             }
             else
             {
                 // iPhone
-                return CGSizeMake(self.view.frame.size.width / 2.3, self.view.frame.size.height / 2.5);
+                return CGSizeMake((self.view.frame.size.width / 2.25) - 10, self.view.frame.size.height / 2.5);
             }
         }
         // Portrait Mode
@@ -221,12 +223,12 @@ static NSString * const previousArticleCell = @"previousArticleCell";
             if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
             {
                 // iPad
-                return CGSizeMake((self.view.frame.size.width / 3) - 10, self.view.frame.size.height / 5);
+                return CGSizeMake((self.view.frame.size.width / 3), self.view.frame.size.height / 5);
             }
             else
             {
                 // iPhone
-                return CGSizeMake((self.view.frame.size.width / 2) - 10, self.view.frame.size.height / 5);
+                return CGSizeMake((self.view.frame.size.width / 2), self.view.frame.size.height / 5);
             }
         }
     }
