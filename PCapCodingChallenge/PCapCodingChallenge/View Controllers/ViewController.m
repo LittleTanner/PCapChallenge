@@ -161,40 +161,29 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Cell Index: %ld", (long)indexPath.item);
-    
     WKWebViewConfiguration *webConfig = [[WKWebViewConfiguration alloc] init];
     WKWebView *webView = [[WKWebView alloc] initWithFrame:self.view.frame configuration:webConfig];
     
-    UINavigationController *webViewNavController = [[UINavigationController alloc] init];
-    UINavigationBar *webViewNavBar = [[UINavigationBar alloc] initWithFrame:CGRectZero];
-    
+    UIViewController *webViewController = [[UIViewController alloc] init];
+    UINavigationController *webViewNavController = [[UINavigationController alloc] initWithRootViewController:webViewController];
+
     webViewNavController.view.backgroundColor = [UIColor systemBackgroundColor];
     
-    [webViewNavController.view addSubview:webView];
-    [webViewNavController.view addSubview:webViewNavBar];
+    [webViewController.view addSubview:webView];
     
-    UINavigationItem *navTitle = [[UINavigationItem alloc] initWithTitle:[_articleEntries[indexPath.item] title]];
+    webViewController.title = [_articleEntries[indexPath.item] title];
     
     UIBarButtonItem *dismissButton = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone target:self action:@selector(onTapDismiss)];
-    navTitle.rightBarButtonItem = dismissButton;
     dismissButton.tintColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
-    
-    [webViewNavBar setItems: @[navTitle]];
+    webViewController.navigationItem.rightBarButtonItem = dismissButton;
     
     [webView loadHTMLString:[_articleEntries[indexPath.item] contentHTML] baseURL:nil];
 
     webView.translatesAutoresizingMaskIntoConstraints = false;
-    [webView.topAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.topAnchor constant:60].active = true;
-    [webView.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
-    [webView.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
-    [webView.bottomAnchor constraintEqualToAnchor:webViewNavController.view.bottomAnchor].active = true;
-    
-    webViewNavBar.translatesAutoresizingMaskIntoConstraints = false;
-    [webViewNavBar.topAnchor constraintEqualToAnchor: webViewNavController.view.topAnchor].active = true;
-    [webViewNavBar.leadingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.leadingAnchor].active = true;
-    [webViewNavBar.trailingAnchor constraintEqualToAnchor:webViewNavController.view.safeAreaLayoutGuide.trailingAnchor].active = true;
-    [webViewNavBar.heightAnchor constraintEqualToConstant:44].active = true;
+    [webView.topAnchor constraintEqualToAnchor:webViewController.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
+    [webView.leadingAnchor constraintEqualToAnchor:webViewController.view.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [webView.trailingAnchor constraintEqualToAnchor:webViewController.view.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
+    [webView.bottomAnchor constraintEqualToAnchor:webViewController.view.bottomAnchor].active = true;
     
     [self presentViewController:webViewNavController animated:false completion:nil];
 }
