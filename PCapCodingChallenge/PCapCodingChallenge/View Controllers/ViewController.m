@@ -19,7 +19,6 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 @property (nonatomic, strong) KDTArticleCollectionView *articleCollectionView;
 @property (nonatomic, readwrite) NSMutableArray *articleEntries;
-@property (nonatomic, readwrite) NSMutableArray *articleImages;
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
 - (void)fetchArticles;
