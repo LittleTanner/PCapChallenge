@@ -78,8 +78,7 @@
 			children = (
 				FC2E49BC24DA3A7400A58E03 /* Models */,
 				FC2E49C024DB3FA200A58E03 /* Model Controller */,
-				FC2E499D24DA0ACA00A58E03 /* ViewController.h */,
-				FC2E499E24DA0ACA00A58E03 /* ViewController.m */,
+				FCE7610324DF76C3000E650D /* View Controllers */,
 				FC642B8924DCB9D1003BC244 /* Views */,
 				FC2E49B024DA10B300A58E03 /* Resources */,
 			);
@@ -131,6 +130,15 @@
 				FC642B8724DCA5B7003BC244 /* KDTPreviousArticleCollectionViewCell.m */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		FCE7610324DF76C3000E650D /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				FC2E499D24DA0ACA00A58E03 /* ViewController.h */,
+				FC2E499E24DA0ACA00A58E03 /* ViewController.m */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

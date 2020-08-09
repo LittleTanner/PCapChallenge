@@ -22,7 +22,7 @@
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     ViewController *mainViewController = [[ViewController alloc] init];
     UINavigationController *mainNavController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
-    mainNavController.view.backgroundColor = [UIColor whiteColor];
+    mainNavController.view.backgroundColor = [UIColor systemBackgroundColor];
     
     self.window.rootViewController = mainNavController;
     [self.window makeKeyAndVisible];

@@ -67,7 +67,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     
     [self.view addSubview:_articleCollectionView];
     
-    _articleCollectionView.backgroundColor = [UIColor whiteColor];
+    _articleCollectionView.backgroundColor = [UIColor systemBackgroundColor];
     
     _articleCollectionView.translatesAutoresizingMaskIntoConstraints = false;
     [_articleCollectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
@@ -126,6 +126,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator: (id<UIViewControllerTransitionCoordinator>)coordinator
 {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
     [self.articleCollectionView reloadData];
 }
 
@@ -166,7 +167,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     UINavigationController *webViewNavController = [[UINavigationController alloc] init];
     UINavigationBar *webViewNavBar = [[UINavigationBar alloc] initWithFrame:CGRectZero];
     
-    webViewNavController.view.backgroundColor = [UIColor whiteColor];
+    webViewNavController.view.backgroundColor = [UIColor systemBackgroundColor];
     
     [webViewNavController.view addSubview:webView];
     [webViewNavController.view addSubview:webViewNavBar];
