@@ -96,6 +96,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     self.navigationItem.title = @"Personal Capital";
     UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"arrow.clockwise"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapRefresh)];
     self.navigationItem.rightBarButtonItem = refreshButton;
+    self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
 }
 
 // MARK: - Helper Methods
@@ -176,6 +177,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     
     UIBarButtonItem *dismissButton = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone target:self action:@selector(onTapDismiss)];
     navTitle.rightBarButtonItem = dismissButton;
+    dismissButton.tintColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
     
     [webViewNavBar setItems: @[navTitle]];
     
