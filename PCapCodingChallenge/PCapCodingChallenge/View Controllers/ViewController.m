@@ -58,6 +58,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     _articleCollectionView = [[KDTArticleCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
     _articleCollectionView.delegate = self;
     _articleCollectionView.dataSource = self;
+    _articleCollectionView.clipsToBounds = false;
     
     articleCollectionFlowLayout.minimumLineSpacing = 0;
     articleCollectionFlowLayout.minimumInteritemSpacing = 0;
@@ -214,7 +215,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
             else
             {
                 // iPhone
-                return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height / 1.1);
+                return CGSizeMake(self.view.safeAreaLayoutGuide.layoutFrame.size.width, self.view.frame.size.height / 1.1);
             }
         }
         // Portrait Mode
