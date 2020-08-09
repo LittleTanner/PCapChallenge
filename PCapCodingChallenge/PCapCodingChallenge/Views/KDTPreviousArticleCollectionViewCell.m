@@ -65,6 +65,11 @@
     [_articleTitleLabel.heightAnchor constraintEqualToConstant:34].active = true;
     [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.cellSeparator.topAnchor constant:-4].active = true;
     
+    [_activityIndicator.centerXAnchor constraintEqualToAnchor:_articleImageView.centerXAnchor].active = true;
+    [_activityIndicator.centerYAnchor constraintEqualToAnchor:_articleImageView.centerYAnchor].active = true;
+    [_activityIndicator.heightAnchor constraintEqualToConstant:44].active = true;
+    [_activityIndicator.widthAnchor constraintEqualToConstant:44].active = true;
+    
     [_cellSeparator.topAnchor constraintEqualToAnchor:_articleTitleLabel.bottomAnchor constant:8].active = true;
     [_cellSeparator.widthAnchor constraintEqualToAnchor:_articleImageView.widthAnchor multiplier:0.25].active = true;
     [_cellSeparator.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;

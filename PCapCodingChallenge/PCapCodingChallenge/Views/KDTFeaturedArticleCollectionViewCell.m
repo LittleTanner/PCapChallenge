@@ -70,8 +70,8 @@
     [_articleSummaryLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-16].active = true;
     [_articleSummaryLabel.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-16].active = true;
     
-    [_activityIndicator.centerYAnchor constraintEqualToAnchor:self.contentView.centerYAnchor].active = true;
-    [_activityIndicator.centerXAnchor constraintEqualToAnchor:self.contentView.centerXAnchor].active = true;
+    [_activityIndicator.centerYAnchor constraintEqualToAnchor:_featuredImageView.centerYAnchor].active = true;
+    [_activityIndicator.centerXAnchor constraintEqualToAnchor:_featuredImageView.centerXAnchor].active = true;
     [_activityIndicator.heightAnchor constraintEqualToConstant:40].active = true;
     [_activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
 }
