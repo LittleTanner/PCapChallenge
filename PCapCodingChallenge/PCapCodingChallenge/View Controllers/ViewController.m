@@ -198,10 +198,31 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    // Featured Article
     if (indexPath.item == 0)
     {
-        return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height/2);
+        // Landscape Mode
+        if (self.view.frame.size.height < self.view.frame.size.width)
+        {
+            if([UIDevice currentDevice].userInterfaceIdiom==UIUserInterfaceIdiomPad)
+            {
+                // iPad
+                return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height / 1.5);
+            }
+            else
+            {
+                // iPhone
+                return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height / 1.1);
+            }
+        }
+        // Portrait Mode
+        else
+        {
+            return CGSizeMake(self.view.frame.size.width, self.view.frame.size.height / 2);
+        }
+        
     }
+    // Previous Articles
     else
     {
         // Landscape Mode
