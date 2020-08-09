@@ -81,12 +81,15 @@
     [_activityIndicator startAnimating];
     [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
     {
+        if (image != nil)
+        {
         dispatch_async(dispatch_get_main_queue(), ^{
             self.featuredImageView.image = image;
             self.articleTitleLabel.text = [article title];
             self.articleSummaryLabel.text = [article summary];
             [self.activityIndicator stopAnimating];
         });
+        }
     }];
 }
 

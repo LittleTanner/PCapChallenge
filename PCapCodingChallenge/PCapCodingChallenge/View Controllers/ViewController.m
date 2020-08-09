@@ -136,7 +136,14 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    return [_articleEntries count];
+    if ([_articleEntries count])
+    {
+        return [_articleEntries count];
+    }
+    else
+    {
+        return 10;
+    }
 }
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath
