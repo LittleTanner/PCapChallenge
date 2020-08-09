@@ -61,13 +61,13 @@
     [_featuredImageView.bottomAnchor constraintEqualToAnchor:_articleTitleLabel.topAnchor constant:-8].active = true;
     
     [_articleTitleLabel.topAnchor constraintEqualToAnchor:_featuredImageView.bottomAnchor constant:8].active = true;
-    [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:16].active = true;
-    [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-16].active = true;
+    [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
     [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:_articleSummaryLabel.topAnchor constant:-4].active = true;
     
     [_articleSummaryLabel.topAnchor constraintEqualToAnchor:_articleTitleLabel.bottomAnchor constant:4].active = true;
-    [_articleSummaryLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:16].active = true;
-    [_articleSummaryLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-16].active = true;
+    [_articleSummaryLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [_articleSummaryLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
     [_articleSummaryLabel.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-16].active = true;
     
     [_activityIndicator.centerYAnchor constraintEqualToAnchor:_featuredImageView.centerYAnchor].active = true;
