@@ -94,7 +94,6 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)setupNavigationBar
 {
-    self.navigationItem.title = @"Personal Capital";
     UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithImage:[UIImage systemImageNamed:@"arrow.clockwise"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapRefresh)];
     self.navigationItem.rightBarButtonItem = refreshButton;
     self.navigationItem.rightBarButtonItem.tintColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
@@ -104,9 +103,10 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)fetchArticles
 {
-    [KDTArticleController fetchArticlesWithCompletion:^(NSMutableArray<KDTArticle *> * _Nonnull articles)
+    [KDTArticleController fetchArticlesWithCompletion:^(NSString *feedTitle, NSMutableArray<KDTArticle *> * _Nonnull articles)
     {
         dispatch_async(dispatch_get_main_queue(), ^ {
+            self.navigationItem.title = feedTitle;
             self.articleEntries = articles;
             [self.articleCollectionView reloadData];
             NSLog(@"Fetched Articles");

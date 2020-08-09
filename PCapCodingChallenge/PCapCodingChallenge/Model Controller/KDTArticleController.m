@@ -12,7 +12,7 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
 
 @implementation KDTArticleController
 
-+ (void)fetchArticlesWithCompletion:(void (^)(NSMutableArray<KDTArticle *> * _Nullable articles))completion
++ (void)fetchArticlesWithCompletion:(void (^)(NSString *feedTitle, NSMutableArray<KDTArticle *> * _Nullable articles))completion
 {
     // Base URL: https://www.personalcapital.com/blog/feed/json
     NSURL *finalURL = [NSURL URLWithString:baseURLString];
@@ -27,7 +27,7 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
         if (error)
         {
             NSLog(@"There was an error in %s: %@, %@", __PRETTY_FUNCTION__, error, [error localizedDescription]);
-            completion(nil);
+            completion(nil, nil);
             return;
         }
         
@@ -45,11 +45,13 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
             if (!topLevelDictionary)
             {
                 NSLog(@"Error parsing the JSON: %@", error);
-                completion(nil);
+                completion(nil, nil);
                 return;
             }
 
             // Decode
+            NSString *feedTitle = [[NSString alloc] initWithString:topLevelDictionary[@"title"]];
+            
             NSArray *articleEntries = topLevelDictionary[@"items"];
             NSMutableArray<KDTArticle *> *articles = [[NSMutableArray alloc] init];
             
@@ -59,7 +61,7 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
                 [articles addObject:entry];
             }
             
-            completion(articles);
+            completion(feedTitle, articles);
         }
     }]resume];
 }
