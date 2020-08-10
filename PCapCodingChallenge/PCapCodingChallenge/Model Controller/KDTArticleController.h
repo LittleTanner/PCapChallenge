@@ -15,7 +15,6 @@ NS_ASSUME_NONNULL_BEGIN
 @interface KDTArticleController : NSObject
 
 + (void)fetchArticlesWithCompletion:(void (^)(NSString *feedTitle, NSMutableArray<KDTArticle *> *articles))completion;
-
 + (void)fetchImageForArticle: (KDTArticle *)article completion: (void (^)(UIImage *image))completion;
 
 @end

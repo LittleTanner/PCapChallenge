@@ -1,13 +1,12 @@
 //
-//  ViewController.m
+//  MainViewController.m
 //  PCapCodingChallenge
 //
 //  Created by Kevin Tanner on 8/4/20.
 //  Copyright © 2020 Kevin Tanner. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "KDTArticleCollectionView.h"
+#import "MainViewController.h"
 #import "KDTFeaturedArticleCollectionViewCell.h"
 #import "KDTPreviousArticleCollectionViewCell.h"
 #import <WebKit/WebKit.h>
@@ -15,9 +14,9 @@
 static NSString * const featuredArticleCell = @"featuredArticleCell";
 static NSString * const previousArticleCell = @"previousArticleCell";
 
-@interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
+@interface MainViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
-@property (nonatomic, strong) KDTArticleCollectionView *articleCollectionView;
+@property (nonatomic, strong) UICollectionView *articleCollectionView;
 @property (nonatomic, readwrite) NSMutableArray *articleEntries;
 @property (nonatomic) UIActivityIndicatorView *activityIndicator;
 
@@ -30,7 +29,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 @end
 
-@implementation ViewController
+@implementation MainViewController
 
 - (void)viewDidLoad
 {
@@ -43,18 +42,12 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [self fetchArticles];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-    [_articleCollectionView reloadData];
-}
-
 // MARK: - UI Helper Methods
 
 - (void) setupArticleCollectionView
 {
     UICollectionViewFlowLayout *articleCollectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    _articleCollectionView = [[KDTArticleCollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
+    _articleCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
     _articleCollectionView.delegate = self;
     _articleCollectionView.dataSource = self;
     _articleCollectionView.clipsToBounds = false;
@@ -108,7 +101,6 @@ static NSString * const previousArticleCell = @"previousArticleCell";
             self.navigationItem.title = feedTitle;
             self.articleEntries = articles;
             [self.articleCollectionView reloadData];
-            NSLog(@"Fetched Articles");
             [self.activityIndicator stopAnimating];
         });
     }];
