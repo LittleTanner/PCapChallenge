@@ -234,7 +234,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
             else
             {
                 // iPhone
-                return CGSizeMake((self.view.frame.size.width / 2.25) - 10, self.view.frame.size.height / 2.5);
+                return CGSizeMake((self.view.frame.size.width / 2.25) - 10, self.view.frame.size.height / 1.5);
             }
         }
         // Portrait Mode

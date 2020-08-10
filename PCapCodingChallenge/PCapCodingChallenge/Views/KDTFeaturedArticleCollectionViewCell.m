@@ -79,11 +79,18 @@
 - (void)configureWithArticle: (KDTArticle *)article
 {
     [_activityIndicator startAnimating];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.25;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionReveal;
+    
     [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
     {
         if (image != nil)
         {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.featuredImageView.layer addAnimation:transition forKey:nil];
             self.featuredImageView.image = image;
             self.articleTitleLabel.text = [article title];
             self.articleSummaryLabel.text = [article summary];

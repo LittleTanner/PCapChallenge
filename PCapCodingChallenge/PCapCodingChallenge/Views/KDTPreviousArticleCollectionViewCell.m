@@ -75,17 +75,26 @@
     [_cellSeparator.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
     [_cellSeparator.heightAnchor constraintEqualToConstant:1].active = true;
     [_cellSeparator.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-8].active = true;
-    
 }
 
 - (void)configureWithArticle: (KDTArticle *)article
 {
     [_activityIndicator startAnimating];
+    
+    CATransition *transition = [CATransition animation];
+    transition.duration = 1;
+    transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+    transition.type = kCATransitionFade;
+    
+    self.articleImageView.image = nil;
+    self.articleTitleLabel.text = nil;
+    
     [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
     {
         if (image != nil)
         {
         dispatch_async(dispatch_get_main_queue(), ^{
+            [self.articleImageView.layer addAnimation:transition forKey:nil];
             self.articleImageView.image = image;
             self.articleTitleLabel.text = [article title];
             [self.activityIndicator stopAnimating];
