@@ -24,6 +24,9 @@
     UINavigationController *mainNavController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     mainNavController.view.backgroundColor = [UIColor systemBackgroundColor];
     
+    UIWindowScene *windowScene = [[UIWindowScene alloc] initWithSession:session connectionOptions:connectionOptions];
+    self.window = [[UIWindow alloc] initWithFrame:windowScene.coordinateSpace.bounds];
+    self.window.windowScene = windowScene;
     self.window.rootViewController = mainNavController;
     [self.window makeKeyAndVisible];
 }
