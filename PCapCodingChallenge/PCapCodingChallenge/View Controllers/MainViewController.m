@@ -95,14 +95,21 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)fetchArticles
 {
+    self.articleEntries = nil;
+    [self.navigationItem.rightBarButtonItem setEnabled:false];
+    
     [KDTArticleController fetchArticlesWithCompletion:^(NSString *feedTitle, NSMutableArray<KDTArticle *> * _Nonnull articles)
-    {
-        dispatch_async(dispatch_get_main_queue(), ^ {
-            self.navigationItem.title = feedTitle;
-            self.articleEntries = articles;
-            [self.articleCollectionView reloadData];
-            [self.activityIndicator stopAnimating];
-        });
+     {
+        if (self.articleEntries == nil)
+        {
+            dispatch_async(dispatch_get_main_queue(), ^ {
+                self.navigationItem.title = feedTitle;
+                self.articleEntries = articles;
+                [self.articleCollectionView reloadData];
+                [self.activityIndicator stopAnimating];
+                [self.navigationItem.rightBarButtonItem setEnabled:true];
+            });
+        }
     }];
 }
 
