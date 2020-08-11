@@ -38,7 +38,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     [self setupNavigationBar];
     [self setupArticleCollectionView];
     [self setupActivityIndicator];
-    [_activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
     [self fetchArticles];
 }
 
@@ -47,41 +47,41 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 - (void) setupArticleCollectionView
 {
     UICollectionViewFlowLayout *articleCollectionFlowLayout = [[UICollectionViewFlowLayout alloc] init];
-    _articleCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
-    _articleCollectionView.delegate = self;
-    _articleCollectionView.dataSource = self;
-    _articleCollectionView.clipsToBounds = false;
+    self.articleCollectionView = [[UICollectionView alloc] initWithFrame:self.view.bounds collectionViewLayout:articleCollectionFlowLayout];
+    self.articleCollectionView.delegate = self;
+    self.articleCollectionView.dataSource = self;
+    self.articleCollectionView.clipsToBounds = false;
     
     articleCollectionFlowLayout.minimumLineSpacing = 0;
     articleCollectionFlowLayout.minimumInteritemSpacing = 0;
     
-    [_articleCollectionView registerClass:[KDTFeaturedArticleCollectionViewCell class] forCellWithReuseIdentifier:featuredArticleCell];
-    [_articleCollectionView registerClass:[KDTPreviousArticleCollectionViewCell class] forCellWithReuseIdentifier:previousArticleCell];
+    [self.articleCollectionView registerClass:[KDTFeaturedArticleCollectionViewCell class] forCellWithReuseIdentifier:featuredArticleCell];
+    [self.articleCollectionView registerClass:[KDTPreviousArticleCollectionViewCell class] forCellWithReuseIdentifier:previousArticleCell];
     
     [self.view addSubview:_articleCollectionView];
     
-    _articleCollectionView.backgroundColor = [UIColor systemBackgroundColor];
+    self.articleCollectionView.backgroundColor = [UIColor systemBackgroundColor];
     
-    _articleCollectionView.translatesAutoresizingMaskIntoConstraints = false;
-    [_articleCollectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
-    [_articleCollectionView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:0].active = true;
-    [_articleCollectionView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:0].active = true;
-    [_articleCollectionView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = true;
+    self.articleCollectionView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.articleCollectionView.topAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;
+    [self.articleCollectionView.leadingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.leadingAnchor constant:0].active = true;
+    [self.articleCollectionView.trailingAnchor constraintEqualToAnchor:self.view.safeAreaLayoutGuide.trailingAnchor constant:0].active = true;
+    [self.articleCollectionView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor constant:0].active = true;
 }
 
 - (void)setupActivityIndicator
 {
-    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
-    _activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
-    [self.view addSubview:_activityIndicator];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
+    [self.view addSubview:self.activityIndicator];
     
-    _activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
-    _activityIndicator.clipsToBounds = true;
+    self.activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
+    self.activityIndicator.clipsToBounds = true;
     
-    [_activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
-    [_activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
-    [_activityIndicator.heightAnchor constraintEqualToConstant:40].active = true;
-    [_activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
+    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.view.centerYAnchor].active = true;
+    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.view.centerXAnchor].active = true;
+    [self.activityIndicator.heightAnchor constraintEqualToConstant:40].active = true;
+    [self.activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
 }
 
 - (void)setupNavigationBar
@@ -120,7 +120,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (void)onTapRefresh
 {
-    [_activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
     [self fetchArticles];
 }
 
@@ -134,9 +134,9 @@ static NSString * const previousArticleCell = @"previousArticleCell";
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if ([_articleEntries count])
+    if ([self.articleEntries count])
     {
-        return [_articleEntries count];
+        return [self.articleEntries count];
     }
     else
     {
@@ -150,7 +150,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     {
         KDTFeaturedArticleCollectionViewCell *featuredCell = [collectionView dequeueReusableCellWithReuseIdentifier:featuredArticleCell forIndexPath:indexPath];
         
-        [featuredCell configureWithArticle:_articleEntries[indexPath.item]];
+        [featuredCell configureWithArticle:self.articleEntries[indexPath.item]];
         
         return featuredCell;
     }
@@ -158,7 +158,7 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     {
         KDTPreviousArticleCollectionViewCell *previousCell = [collectionView dequeueReusableCellWithReuseIdentifier:previousArticleCell forIndexPath:indexPath];
         
-        [previousCell configureWithArticle:_articleEntries[indexPath.item]];
+        [previousCell configureWithArticle:self.articleEntries[indexPath.item]];
         
         return previousCell;
     }
@@ -176,13 +176,13 @@ static NSString * const previousArticleCell = @"previousArticleCell";
     
     [webViewController.view addSubview:webView];
     
-    webViewController.title = [_articleEntries[indexPath.item] title];
+    webViewController.title = [self.articleEntries[indexPath.item] title];
     
     UIBarButtonItem *dismissButton = [[UIBarButtonItem alloc] initWithTitle:@"Dismiss" style:UIBarButtonItemStyleDone target:self action:@selector(onTapDismiss)];
     dismissButton.tintColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
     webViewController.navigationItem.rightBarButtonItem = dismissButton;
     
-    [webView loadHTMLString:[_articleEntries[indexPath.item] contentHTML] baseURL:nil];
+    [webView loadHTMLString:[self.articleEntries[indexPath.item] contentHTML] baseURL:nil];
 
     webView.translatesAutoresizingMaskIntoConstraints = false;
     [webView.topAnchor constraintEqualToAnchor:webViewController.view.safeAreaLayoutGuide.topAnchor constant:0].active = true;

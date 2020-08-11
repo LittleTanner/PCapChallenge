@@ -27,59 +27,59 @@
 
 - (void)setupUI
 {
-    _articleImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
-    _articleImageView.translatesAutoresizingMaskIntoConstraints = false;
-    [self.contentView addSubview:_articleImageView];
+    self.articleImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    self.articleImageView.translatesAutoresizingMaskIntoConstraints = false;
+    [self.contentView addSubview:self.articleImageView];
     
-    _articleTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
-    _articleTitleLabel.translatesAutoresizingMaskIntoConstraints = false;
-    [self.contentView addSubview:_articleTitleLabel];
+    self.articleTitleLabel = [[UILabel alloc] initWithFrame:CGRectZero];
+    self.articleTitleLabel.translatesAutoresizingMaskIntoConstraints = false;
+    [self.contentView addSubview:self.articleTitleLabel];
     
-    _activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
-    _activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
-    [self.contentView addSubview:_activityIndicator];
+    self.activityIndicator = [[UIActivityIndicatorView alloc] initWithFrame:CGRectZero];
+    self.activityIndicator.translatesAutoresizingMaskIntoConstraints = false;
+    [self.contentView addSubview:self.activityIndicator];
     
-    _cellSeparator = [[UIView alloc] initWithFrame:CGRectZero];
-    _cellSeparator.translatesAutoresizingMaskIntoConstraints = false;
-    [self.contentView addSubview:_cellSeparator];
+    self.cellSeparator = [[UIView alloc] initWithFrame:CGRectZero];
+    self.cellSeparator.translatesAutoresizingMaskIntoConstraints = false;
+    [self.contentView addSubview:self.cellSeparator];
     
-    _activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
-    _activityIndicator.clipsToBounds = true;
+    self.activityIndicator.contentMode = UIViewContentModeScaleAspectFit;
+    self.activityIndicator.clipsToBounds = true;
     
-    _articleImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _articleImageView.clipsToBounds = true;
+    self.articleImageView.contentMode = UIViewContentModeScaleAspectFill;
+    self.articleImageView.clipsToBounds = true;
     
-    _articleTitleLabel.numberOfLines = 2;
-    _articleTitleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
+    self.articleTitleLabel.numberOfLines = 2;
+    self.articleTitleLabel.font = [UIFont systemFontOfSize:14 weight:UIFontWeightRegular];
     
-    _cellSeparator.backgroundColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
+    self.cellSeparator.backgroundColor = [UIColor colorNamed:@"PersonalCapitalBlue"];
     
-    [_articleImageView.topAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.topAnchor constant:8].active = true;
-    [_articleImageView.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
-    [_articleImageView.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
-    [_articleImageView.bottomAnchor constraintEqualToAnchor:_articleTitleLabel.topAnchor constant:-4].active = true;
+    [self.articleImageView.topAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.topAnchor constant:8].active = true;
+    [self.articleImageView.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [self.articleImageView.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
+    [self.articleImageView.bottomAnchor constraintEqualToAnchor:self.articleTitleLabel.topAnchor constant:-4].active = true;
     
-    [_articleTitleLabel.topAnchor constraintEqualToAnchor:_articleImageView.bottomAnchor constant:4].active = true;
-    [_articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
-    [_articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
-    [_articleTitleLabel.heightAnchor constraintEqualToConstant:34].active = true;
-    [_articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.cellSeparator.topAnchor constant:-4].active = true;
+    [self.articleTitleLabel.topAnchor constraintEqualToAnchor:self.articleImageView.bottomAnchor constant:4].active = true;
+    [self.articleTitleLabel.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [self.articleTitleLabel.trailingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.trailingAnchor constant:-8].active = true;
+    [self.articleTitleLabel.heightAnchor constraintEqualToConstant:34].active = true;
+    [self.articleTitleLabel.bottomAnchor constraintEqualToAnchor:self.cellSeparator.topAnchor constant:-4].active = true;
     
-    [_activityIndicator.centerXAnchor constraintEqualToAnchor:_articleImageView.centerXAnchor].active = true;
-    [_activityIndicator.centerYAnchor constraintEqualToAnchor:_articleImageView.centerYAnchor].active = true;
-    [_activityIndicator.heightAnchor constraintEqualToConstant:44].active = true;
-    [_activityIndicator.widthAnchor constraintEqualToConstant:44].active = true;
+    [self.activityIndicator.centerXAnchor constraintEqualToAnchor:self.articleImageView.centerXAnchor].active = true;
+    [self.activityIndicator.centerYAnchor constraintEqualToAnchor:self.articleImageView.centerYAnchor].active = true;
+    [self.activityIndicator.heightAnchor constraintEqualToConstant:44].active = true;
+    [self.activityIndicator.widthAnchor constraintEqualToConstant:44].active = true;
     
-    [_cellSeparator.topAnchor constraintEqualToAnchor:_articleTitleLabel.bottomAnchor constant:8].active = true;
-    [_cellSeparator.widthAnchor constraintEqualToAnchor:_articleImageView.widthAnchor multiplier:0.25].active = true;
-    [_cellSeparator.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
-    [_cellSeparator.heightAnchor constraintEqualToConstant:1].active = true;
-    [_cellSeparator.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-8].active = true;
+    [self.cellSeparator.topAnchor constraintEqualToAnchor:self.articleTitleLabel.bottomAnchor constant:8].active = true;
+    [self.cellSeparator.widthAnchor constraintEqualToAnchor:self.articleImageView.widthAnchor multiplier:0.25].active = true;
+    [self.cellSeparator.leadingAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.leadingAnchor constant:8].active = true;
+    [self.cellSeparator.heightAnchor constraintEqualToConstant:1].active = true;
+    [self.cellSeparator.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-8].active = true;
 }
 
 - (void)configureWithArticle: (KDTArticle *)article
 {
-    [_activityIndicator startAnimating];
+    [self.activityIndicator startAnimating];
     
     CATransition *transition = [CATransition animation];
     transition.duration = 1;
