@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		FC2E499924DA0ACA00A58E03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E499824DA0ACA00A58E03 /* AppDelegate.m */; };
 		FC2E499C24DA0ACA00A58E03 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E499B24DA0ACA00A58E03 /* SceneDelegate.m */; };
-		FC2E499F24DA0ACA00A58E03 /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E499E24DA0ACA00A58E03 /* MainViewController.m */; };
+		FC2E499F24DA0ACA00A58E03 /* KDTMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E499E24DA0ACA00A58E03 /* KDTMainViewController.m */; };
 		FC2E49A424DA0ACC00A58E03 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC2E49A324DA0ACC00A58E03 /* Assets.xcassets */; };
 		FC2E49A724DA0ACC00A58E03 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC2E49A524DA0ACC00A58E03 /* LaunchScreen.storyboard */; };
 		FC2E49AA24DA0ACC00A58E03 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2E49A924DA0ACC00A58E03 /* main.m */; };
@@ -25,8 +25,8 @@
 		FC2E499824DA0ACA00A58E03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		FC2E499A24DA0ACA00A58E03 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
 		FC2E499B24DA0ACA00A58E03 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
-		FC2E499D24DA0ACA00A58E03 /* MainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
-		FC2E499E24DA0ACA00A58E03 /* MainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		FC2E499D24DA0ACA00A58E03 /* KDTMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KDTMainViewController.h; sourceTree = "<group>"; };
+		FC2E499E24DA0ACA00A58E03 /* KDTMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KDTMainViewController.m; sourceTree = "<group>"; };
 		FC2E49A324DA0ACC00A58E03 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC2E49A624DA0ACC00A58E03 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FC2E49A824DA0ACC00A58E03 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 		FCE7610324DF76C3000E650D /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				FC2E499D24DA0ACA00A58E03 /* MainViewController.h */,
-				FC2E499E24DA0ACA00A58E03 /* MainViewController.m */,
+				FC2E499D24DA0ACA00A58E03 /* KDTMainViewController.h */,
+				FC2E499E24DA0ACA00A58E03 /* KDTMainViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -204,7 +204,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC2E49C324DB3FCB00A58E03 /* KDTArticleController.m in Sources */,
-				FC2E499F24DA0ACA00A58E03 /* MainViewController.m in Sources */,
+				FC2E499F24DA0ACA00A58E03 /* KDTMainViewController.m in Sources */,
 				FC2E499924DA0ACA00A58E03 /* AppDelegate.m in Sources */,
 				FC2E49AA24DA0ACC00A58E03 /* main.m in Sources */,
 				FC2E49BF24DA3A8200A58E03 /* KDTArticle.m in Sources */,

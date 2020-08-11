@@ -10,8 +10,7 @@
 
 @implementation KDTFeaturedArticleCollectionViewCell
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setupUI];
@@ -19,14 +18,12 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     [self setupUI];
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     self.featuredImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.featuredImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.contentView addSubview:self.featuredImageView];
@@ -76,8 +73,7 @@
     [self.activityIndicator.widthAnchor constraintEqualToConstant:40].active = true;
 }
 
-- (void)configureWithArticle: (KDTArticle *)article
-{
+- (void)configureWithArticle: (KDTArticle *)article {
     [self.activityIndicator startAnimating];
     
     CATransition *transition = [CATransition animation];
@@ -85,17 +81,15 @@
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
     transition.type = kCATransitionReveal;
     
-    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
-    {
-        if (image != nil)
-        {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self.featuredImageView.layer addAnimation:transition forKey:nil];
-            self.featuredImageView.image = image;
-            self.articleTitleLabel.text = [article title];
-            self.articleSummaryLabel.text = [article summary];
-            [self.activityIndicator stopAnimating];
-        });
+    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
+        if (image != nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self.featuredImageView.layer addAnimation:transition forKey:nil];
+                self.featuredImageView.image = image;
+                self.articleTitleLabel.text = [article title];
+                self.articleSummaryLabel.text = [article summary];
+                [self.activityIndicator stopAnimating];
+            });
         }
     }];
 }

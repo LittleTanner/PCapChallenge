@@ -12,35 +12,29 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
 
 @implementation KDTArticleController
 
-+ (void)fetchArticlesWithCompletion:(void (^)(NSString *feedTitle, NSMutableArray<KDTArticle *> * _Nullable articles))completion
-{
++ (void)fetchArticlesWithCompletion:(void (^)(NSString *feedTitle, NSMutableArray<KDTArticle *> * _Nullable articles))completion {
     // Base URL: https://www.personalcapital.com/blog/feed/json
     NSURL *finalURL = [NSURL URLWithString:baseURLString];
     
     // Data Task
-    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-    {
+    [[[NSURLSession sharedSession] dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Handle the error
-        if (error)
-        {
+        if (error) {
             NSLog(@"There was an error in %s: %@, %@", __PRETTY_FUNCTION__, error, [error localizedDescription]);
             completion(nil, nil);
             return;
         }
         
         // Handle the response
-        if (response)
-        {
+        if (response) {
 //            NSLog(@"Response: %@", response);
         }
         
         // Handle the data
-        if (data)
-        {
+        if (data) {
             NSDictionary *topLevelDictionary = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
             
-            if (!topLevelDictionary)
-            {
+            if (!topLevelDictionary) {
                 NSLog(@"Error parsing the JSON: %@", error);
                 completion(nil, nil);
                 return;
@@ -52,8 +46,7 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
             NSArray *articleEntries = topLevelDictionary[@"items"];
             NSMutableArray<KDTArticle *> *articles = [[NSMutableArray alloc] init];
             
-            for (NSDictionary * articleDict in articleEntries)
-            {
+            for (NSDictionary * articleDict in articleEntries) {
                 KDTArticle *entry = [[KDTArticle alloc] initWithDictionary:articleDict];
                 [articles addObject:entry];
             }
@@ -63,30 +56,25 @@ static NSString * const baseURLString = @"https://www.personalcapital.com/blog/f
     }]resume];
 }
 
-+ (void)fetchImageForArticle:(KDTArticle *)article completion:(void (^)(UIImage * _Nullable image))completion
-{
++ (void)fetchImageForArticle:(KDTArticle *)article completion:(void (^)(UIImage * _Nullable image))completion {
     // URL
     NSURL *imageURL = [NSURL URLWithString:[article featuredImagePath]];
 
-    [[[NSURLSession sharedSession] dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
-    {
+    [[[NSURLSession sharedSession] dataTaskWithURL:imageURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // Check for error
-        if (error)
-        {
+        if (error) {
             NSLog(@"There was an error in %s: %@, %@", __PRETTY_FUNCTION__, error, [error localizedDescription]);
             completion(nil);
             return;
         }
         
         // Handle the response
-        if (response)
-        {
+        if (response) {
 //            NSLog(@"Response: %@", response);
         }
         
         // Handle the data
-        if (!data)
-        {
+        if (!data) {
             NSLog(@"%@", error);
             completion(nil);
             return;

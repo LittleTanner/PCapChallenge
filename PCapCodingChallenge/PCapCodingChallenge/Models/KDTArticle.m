@@ -15,10 +15,8 @@ static NSString * const contentHTMLKey = @"content_html";
 
 @implementation KDTArticle
 
-- (instancetype)initWithTitle:(NSString *)title featuredImagePath:(NSString *)featuredImagePath summary:(NSString *)summary contentHTML:(NSString *)contentHTML
-{
-    if (self = [super init])
-    {
+- (instancetype)initWithTitle:(NSString *)title featuredImagePath:(NSString *)featuredImagePath summary:(NSString *)summary contentHTML:(NSString *)contentHTML {
+    if (self = [super init]) {
         _title = title;
         _featuredImagePath = featuredImagePath;
         _summary = summary;
@@ -31,8 +29,7 @@ static NSString * const contentHTMLKey = @"content_html";
 
 @implementation KDTArticle (JSONConvertable)
 
-- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary
-{
+- (instancetype)initWithDictionary:(NSDictionary<NSString *,id> *)dictionary {
     NSString *title = dictionary[titleKey];
     NSString *featuredImagePath = dictionary[featuredImageKey];
     NSString *summary = dictionary[summaryKey];

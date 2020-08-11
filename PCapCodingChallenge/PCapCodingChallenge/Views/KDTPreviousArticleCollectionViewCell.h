@@ -14,10 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface KDTPreviousArticleCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic) UIImageView *articleImageView;
-@property (nonatomic, copy) UILabel *articleTitleLabel;
-@property (nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (nonatomic) UIView *cellSeparator;
+@property (nonatomic, strong) UIImageView *articleImageView;
+@property (nonatomic, strong) UILabel *articleTitleLabel;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, strong) UIView *cellSeparator;
 
 - (void)setupUI;
 - (void)configureWithArticle: (KDTArticle *)article;

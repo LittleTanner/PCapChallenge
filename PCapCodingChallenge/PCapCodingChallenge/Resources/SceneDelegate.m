@@ -7,7 +7,7 @@
 //
 
 #import "SceneDelegate.h"
-#import "MainViewController.h"
+#import "KDTMainViewController.h"
 
 @interface SceneDelegate ()
 
@@ -20,12 +20,13 @@
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
     // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-    MainViewController *mainViewController = [[MainViewController alloc] init];
+    KDTMainViewController *mainViewController = [[KDTMainViewController alloc] init];
     UINavigationController *mainNavController = [[UINavigationController alloc] initWithRootViewController:mainViewController];
     mainNavController.view.backgroundColor = [UIColor systemBackgroundColor];
     
-    UIWindowScene *windowScene = [[UIWindowScene alloc] initWithSession:session connectionOptions:connectionOptions];
-    self.window = [[UIWindow alloc] initWithFrame:windowScene.coordinateSpace.bounds];
+    UIWindowScene *windowScene = (UIWindowScene *)scene;
+    self.window = [[UIWindow alloc] initWithWindowScene:windowScene];
+    self.window.frame = windowScene.coordinateSpace.bounds;
     self.window.windowScene = windowScene;
     self.window.rootViewController = mainNavController;
     [self.window makeKeyAndVisible];

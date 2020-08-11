@@ -10,8 +10,7 @@
 
 @implementation KDTPreviousArticleCollectionViewCell
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
         [self setupUI];
@@ -19,14 +18,12 @@
     return self;
 }
 
-- (void)awakeFromNib
-{
+- (void)awakeFromNib {
     [super awakeFromNib];
     [self setupUI];
 }
 
-- (void)setupUI
-{
+- (void)setupUI {
     self.articleImageView = [[UIImageView alloc] initWithFrame:CGRectZero];
     self.articleImageView.translatesAutoresizingMaskIntoConstraints = false;
     [self.contentView addSubview:self.articleImageView];
@@ -77,8 +74,7 @@
     [self.cellSeparator.bottomAnchor constraintEqualToAnchor:self.contentView.safeAreaLayoutGuide.bottomAnchor constant:-8].active = true;
 }
 
-- (void)configureWithArticle: (KDTArticle *)article
-{
+- (void)configureWithArticle: (KDTArticle *)article {
     [self.activityIndicator startAnimating];
     
     CATransition *transition = [CATransition animation];
@@ -89,8 +85,7 @@
     self.articleImageView.image = nil;
     self.articleTitleLabel.text = nil;
     
-    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image)
-    {
+    [KDTArticleController fetchImageForArticle:article completion:^(UIImage * _Nonnull image) {
         if (image != nil)
         {
         dispatch_async(dispatch_get_main_queue(), ^{

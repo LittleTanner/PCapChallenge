@@ -1,5 +1,5 @@
 //
-//  MainViewController.h
+//  KDTMainViewController.h
 //  PCapCodingChallenge
 //
 //  Created by Kevin Tanner on 8/4/20.
@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "KDTArticleController.h"
 
-@interface MainViewController : UIViewController
+@interface KDTMainViewController : UIViewController
 
 
 @end
